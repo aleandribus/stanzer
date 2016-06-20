@@ -69,12 +69,13 @@ else{
 	$text. = trim($text);
 	$text. = strtolower($text);
 	
-	mysql_query("INSERT INTO users(ID,USERNAME) VALUES ($chatId,'$username');");
+	if (!mysql_query("INSERT INTO users(ID,USERNAME) VALUES ($chatId,'$username');"))
+		$text.=" Errore insert";
 }
+mysql_close($db_conn);
 
 header("Content-Type: application/json");
 $parameters = array('chat_id' => $chatId, "text" => $text);
 $parameters["method"] = "sendMessage";
 echo json_encode($parameters);
 
-mysql_close($db_conn);
