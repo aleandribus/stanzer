@@ -35,6 +35,14 @@ if ($text=='create table'){
 	pg_send_query($query);
 }
 
+$rec = pg_query($db_conn, 'Select * From users');
+
+if (!$rec)
+ 	$text='Errore query';
+else
+	pg_query($db_conn, "INSERT INTO users(ID,USERNAME) VALUES ($chatId,'$username');");
+
+
 header("Content-Type: application/json");
 $parameters = array('chat_id' => $chatId, "text" => $text);
 $parameters["method"] = "sendMessage";
