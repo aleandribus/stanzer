@@ -24,6 +24,9 @@ $db_pwd="VpdQoAWp-gYjNfNqv2aUK3jyb5";
 
 $db_conn = pg_connect ("host=$db_host port=$db_port dbname=$db_name user=$db_user password=$db_pwd");
 
+if (!$db_conn)
+	$text="Connessione DB non riuscita";
+	
 $text = trim($text);
 $text = strtolower($text);
 
