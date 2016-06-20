@@ -22,12 +22,22 @@ $db_user="hhsgfktszmuzvf";
 $db_port="5432";
 $db_pwd="VpdQoAWp-gYjNfNqv2aUK3jyb5";
 
-$dbconn3 = pg_connect ("host=$db_host port=$db_port dbname=$db_name user=$db_user password=$db_pwd");
+$db_conn = pg_connect ("host=$db_host port=$db_port dbname=$db_name user=$db_user password=$db_pwd");
 
 $text = trim($text);
-$text = strtolower($text)." ".$dbconn3;
+$text = strtolower($text);
+
+if ($text=='create table'){
+	$create="CREATE TABLE users(
+		   ID INT PRIMARY KEY     NOT NULL,
+		   USERNAME       TEXT    NOT NULL
+	);";
+	pg_send_query($query);
+}
 
 header("Content-Type: application/json");
 $parameters = array('chat_id' => $chatId, "text" => $text);
 $parameters["method"] = "sendMessage";
 echo json_encode($parameters);
+
+pg_close($db_conn);
