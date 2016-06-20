@@ -26,30 +26,30 @@ $db_conn = pg_connect ("host=$db_host port=$db_port dbname=$db_name user=$db_use
 
 if (!$db_conn)
 	$text="Connessione DB non riuscita";
+else{	
+	$text = trim($text);
+	$text = strtolower($text);
 	
-$text = trim($text);
-$text = strtolower($text);
-
-if ($text=='create table'){
-	$create="CREATE TABLE users(
-		   ID INT PRIMARY KEY     NOT NULL,
-		   USERNAME       TEXT    NOT NULL
-	);";
-	$res=pg_execute($query);
+	if ($text=='create table'){
+		$create="CREATE TABLE users(
+			   ID INT PRIMARY KEY     NOT NULL,
+			   USERNAME       TEXT    NOT NULL
+		);";
+		$res=pg_execute($query);
+		
+		if (!$res)
+			$text="Errore create table";
+		else
+			$text.="CREATE TABLE";
+	}
 	
-	if (!$res)
-		$text="Errore create table";
+	$rec = pg_query($db_conn, 'Select * From users');
+	
+	if (!$rec)
+	 	$text='Errore query';
 	else
-		$text.="CREATE TABLE";
+		pg_query($db_conn, "INSERT INTO users(ID,USERNAME) VALUES ($chatId,'$username');");
 }
-
-$rec = pg_query($db_conn, 'Select * From users');
-
-if (!$rec)
- 	$text='Errore query';
-else
-	pg_query($db_conn, "INSERT INTO users(ID,USERNAME) VALUES ($chatId,'$username');");
-
 
 header("Content-Type: application/json");
 $parameters = array('chat_id' => $chatId, "text" => $text);
