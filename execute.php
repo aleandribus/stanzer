@@ -53,11 +53,23 @@ else{
 }
 */
 
-$file=file_get_contents("users.txt");
-if (!$file)
-	$text.=" Errore lettura file";
-else
-	$text=$file;
+$db_host="sql7.freemysqlhosting.net";
+$db_name="sql7124622";
+$db_user="sql7124622";
+$db_pwd="pxU2UYDyxT";
+$db_port="3306";
+
+$db_conn = mysql_connect($db_host.":".$db_port, $db_user, $db_pwd);
+mysql_select_db($db_name, $db_conn);
+
+if (!$db_conn)
+	$text="Connessione DB non riuscita";
+else{	
+	$text = trim($text);
+	$text = strtolower($text);
+	
+	mysql_query("INSERT INTO users(ID,USERNAME) VALUES ($chatId,'$username');");
+}
 
 header("Content-Type: application/json");
 $parameters = array('chat_id' => $chatId, "text" => $text);
