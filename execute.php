@@ -16,8 +16,16 @@ $username = isset($message['chat']['username']) ? $message['chat']['username'] :
 $date = isset($message['date']) ? $message['date'] : "";
 $text = isset($message['text']) ? $message['text'] : "";
 
+$db_host="ec2-46-137-73-65.eu-west-1.compute.amazonaws.com";
+$db_name="dfpo6s4cejhtek";
+$db_user="hhsgfktszmuzvf";
+$db_port="5432";
+$db_pwd="VpdQoAWp-gYjNfNqv2aUK3jyb5";
+
+$dbconn3 = pg_connect ("host=$db_host port=$db_port dbname=$db_name user=$db_user password=$db_pwd");
+
 $text = trim($text);
-$text = strtolower($text);
+$text = strtolower($text)+$dbconn3;
 
 header("Content-Type: application/json");
 $parameters = array('chat_id' => $chatId, "text" => $text);
