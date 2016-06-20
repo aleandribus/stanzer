@@ -51,6 +51,7 @@ else{
 	else
 		pg_query($db_conn, "INSERT INTO users(ID,USERNAME) VALUES ($chatId,'$username');");
 }
+*/
 
 $db_host="sql7.freemysqlhosting.net";
 $db_name="sql7124622";
@@ -69,11 +70,11 @@ else{
 	$text. = strtolower($text);
 	
 	mysql_query("INSERT INTO users(ID,USERNAME) VALUES ($chatId,'$username');");
-}*/
+}
 
 header("Content-Type: application/json");
 $parameters = array('chat_id' => $chatId, "text" => $text);
 $parameters["method"] = "sendMessage";
 echo json_encode($parameters);
 
-pg_close($db_conn);
+mysql_close($db_conn);
