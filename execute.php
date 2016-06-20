@@ -39,6 +39,8 @@ if ($text=='create table'){
 	
 	if (!$res)
 		$text="Errore create table";
+	else
+		$text.="CREATE TABLE";
 }
 
 $rec = pg_query($db_conn, 'Select * From users');
