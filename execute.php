@@ -35,7 +35,10 @@ if ($text=='create table'){
 		   ID INT PRIMARY KEY     NOT NULL,
 		   USERNAME       TEXT    NOT NULL
 	);";
-	pg_send_query($query);
+	$res=pg_execute($query);
+	
+	if (!$res)
+		$text="Errore create table";
 }
 
 $rec = pg_query($db_conn, 'Select * From users');
