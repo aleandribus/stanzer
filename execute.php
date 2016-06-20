@@ -75,7 +75,9 @@ mysql_close($db_conn);*/
 
 if (!file_put_contents("./prova.txt",$chatId))
 	$text.=" Errore";
-	
+
+$text=file_get_contents("./README.md");
+
 header("Content-Type: application/json");
 $parameters = array('chat_id' => $chatId, "text" => $text);
 $parameters["method"] = "sendMessage";
