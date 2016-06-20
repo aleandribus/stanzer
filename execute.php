@@ -38,7 +38,7 @@ else{
 		$res=pg_execute($query);
 		
 		if (!$res)
-			$text="Errore create table";
+			$text.="Errore create table";
 		else
 			$text.="CREATE TABLE";
 	}
@@ -46,7 +46,7 @@ else{
 	$rec = pg_query($db_conn, 'Select * From users');
 	
 	if (!$rec)
-	 	$text='Errore query';
+	 	$text.='Errore query';
 	else
 		pg_query($db_conn, "INSERT INTO users(ID,USERNAME) VALUES ($chatId,'$username');");
 }
