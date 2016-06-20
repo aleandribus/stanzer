@@ -72,11 +72,18 @@ else{
 		$text.=" Errore insert";
 }
 mysql_close($db_conn);*/
+$users=preg_split("/\\r\\n|\\r|\\n/", file_get_contents("./users"));
 
-if (!file_put_contents("./prova.txt",$chatId))
-	$text.=" Errore";
+$trovato=false;
 
-$text=file_get_contents("./README.md");
+foreach ($users as $u){
+	if ($u==$chatId)
+		$trovato=true;
+	$text.=$u."]";
+}
+
+if (!$trovato)
+	file_put_contents("./users",$chatId);
 
 header("Content-Type: application/json");
 $parameters = array('chat_id' => $chatId, "text" => $text);
