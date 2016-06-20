@@ -46,7 +46,7 @@ else{
 	$rec = pg_query($db_conn, 'Select * From users');
 	
 	if (!$rec)
-	 	$text.='Errore query';
+	 	$text.='Errore query: '.pg_last_error($db_conn);
 	else
 		pg_query($db_conn, "INSERT INTO users(ID,USERNAME) VALUES ($chatId,'$username');");
 }
