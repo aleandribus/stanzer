@@ -60,13 +60,14 @@ $db_pwd="pxU2UYDyxT";
 $db_port="3306";
 
 $db_conn = mysql_connect($db_host.":".$db_port, $db_user, $db_pwd);
-mysql_select_db($db_name, $db_conn);
+if (!mysql_select_db($db_name, $db_conn))
+	$text.=" Errore select db";
 
 if (!$db_conn)
 	$text="Connessione DB non riuscita";
 else{	
-	$text = trim($text);
-	$text = strtolower($text);
+	$text. = trim($text);
+	$text. = strtolower($text);
 	
 	mysql_query("INSERT INTO users(ID,USERNAME) VALUES ($chatId,'$username');");
 }
