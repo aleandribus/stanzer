@@ -16,6 +16,7 @@ $username = isset($message['chat']['username']) ? $message['chat']['username'] :
 $date = isset($message['date']) ? $message['date'] : "";
 $text = isset($message['text']) ? $message['text'] : "";
 
+/*
 $db_host="ec2-46-137-73-65.eu-west-1.compute.amazonaws.com";
 $db_name="dfpo6s4cejhtek";
 $db_user="hhsgfktszmuzvf";
@@ -50,6 +51,13 @@ else{
 	else
 		pg_query($db_conn, "INSERT INTO users(ID,USERNAME) VALUES ($chatId,'$username');");
 }
+*/
+
+$file=file_get_contents("users.txt");
+if (!$file)
+	$text.=" Errore lettura file";
+else
+	$text=$file;
 
 header("Content-Type: application/json");
 $parameters = array('chat_id' => $chatId, "text" => $text);
