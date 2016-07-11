@@ -3,6 +3,8 @@ use Telegram\Bot\Api;
 
 $telegram = new Api('239741646:AAEhXVLMuauspps3_fQm3yVSlorvu1Pyj_I');
 
+print_r($telegram);
+
 $content = file_get_contents("php://input");
 $update = json_decode($content, true);
 
