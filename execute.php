@@ -1,34 +1,4 @@
 <?php
-/*
-$content = file_get_contents("php://input");
-$update = json_decode($content, true);
-
-if(!$update)
-{
-  exit;
-}
-
-$message = isset($update['message']) ? $update['message'] : "";
-$messageId = isset($message['message_id']) ? $message['message_id'] : "";
-$chatId = isset($message['chat']['id']) ? $message['chat']['id'] : "";
-$firstname = isset($message['chat']['first_name']) ? $message['chat']['first_name'] : "";
-$lastname = isset($message['chat']['last_name']) ? $message['chat']['last_name'] : "";
-$username = isset($message['chat']['username']) ? $message['chat']['username'] : "";
-$date = isset($message['date']) ? $message['date'] : "";
-$text = isset($message['text']) ? $message['text'] : "";
-
-header("Content-Type: application/json");
-$parameters = array('chat_id' => $chatId, "text" => $text);
-$parameters["method"] = "sendMessage";
-echo json_encode($parameters);
-$text="aho ".$text;
-parameters = array('chat_id' => $chatId, "text" => $text);
-$parameters["method"] = "sendMessage";
-echo json_encode($parameters);
-*/
-?>
-
-<?php
 
 define('BOT_TOKEN', '239741646:AAEhXVLMuauspps3_fQm3yVSlorvu1Pyj_I');
 define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.'/');
@@ -161,7 +131,8 @@ function processMessage($message) {
     } else if (strpos($text, "/stop") === 0) {
       // stop now
     } else {
-      apiRequestWebhook("sendMessage", array('chat_id' => $chat_id, "reply_to_message_id" => $message_id, "text" => 'Cool'));
+      //apiRequestWebhook("sendMessage", array('chat_id' => $chat_id, "reply_to_message_id" => $message_id, "text" => 'Cool'));
+      apiRequest("editMessageText",array('chat_id' => $chat_id, "message_id" => $message_id, "text" => 'Cool '.$text));
     }
   } else {
     apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'I understand only text messages'));
