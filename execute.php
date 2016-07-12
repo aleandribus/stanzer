@@ -23,5 +23,5 @@ $parameters["method"] = "sendMessage";
 echo json_encode($parameters);*/
 $text="aho ".$text;
 parameters = array('chat_id' => $chatId, "text" => $text, "message_id" => $messageId);
-$parameters["method"] = "editMessageText";
+$parameters["method"] = "sendMessage";
 echo json_encode($parameters);
