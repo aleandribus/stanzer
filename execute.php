@@ -17,8 +17,13 @@ $username = isset($message['chat']['username']) ? $message['chat']['username'] :
 $date = isset($message['date']) ? $message['date'] : "";
 $text = isset($message['text']) ? $message['text'] : "";
 
-header("Content-Type: application/json");
-$parameters = array('chat_id' => $chatId, "text" => $text);
-$parameters["method"] = "sendMessage";
-echo json_encode($parameters);
-
+if ($messageId!=''){
+  header("Content-Type: application/json");
+  /*$parameters = array('chat_id' => $chatId, "text" => $text);
+  $parameters["method"] = "sendMessage";
+  echo json_encode($parameters);*/
+  $text="aho ".$text;
+  parameters = array('chat_id' => $chatId, "text" => $text, "message_id" => $messageId);
+  $parameters["method"] = "editMessageText";
+  echo json_encode($parameters);
+}
