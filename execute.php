@@ -22,6 +22,8 @@ header("Content-Type: application/json");
 $parameters["method"] = "sendMessage";
 echo json_encode($parameters);*/
 $text="aho ".$text;
-parameters = array('chat_id' => $chatId, "text" => $text, "message_id" => $messageId);
+parameters = array('chat_id' => $chatId, "text" => $text);
 $parameters["method"] = "sendMessage";
 echo json_encode($parameters);
+
+?>
